@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dreamspace - profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="author" content="TIKITAKA.INC">
+  <meta name="description" content="Dreamspace - profile">
+  <meta name="application-name" content="Dreamspace - profile">
+  <meta name="keywords" content="Dreamspace, profile, profilepage">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #1c1c1c;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #app {
+      padding: 20px;
+    }
+
+    .editInput {
+      width: 80%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    .editButton {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .editButton:hover {
+      background-color: #45a049;
+    }
+
+    h2 {
+      color: #61dafb;
+      text-transform: uppercase;
+      font-size: 24px;
+    }
+
+    .websiteLink {
+      color: #1e90ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    input {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <center>
+      <h2>Edit Username:</h2>
+      <input type="text" id="usernameInput" class="editInput">
+      <button onclick="saveUsername()" class="editButton">Save</button>
+
+      <h2>Edit Main Website:</h2>
+      <a id="mainWebsiteLink" class="websiteLink" target="_blank">View Website</a>
+      <input type="text" id="mainWebsiteInput" class="editInput">
+      <button onclick="saveMainWebsite()" class="editButton">Save</button>
+    </center>
+  </div>
+
+  <script>
+    var usernameInput = document.getElementById('usernameInput');
+    var mainWebsiteInput = document.getElementById('mainWebsiteInput');
+    var mainWebsiteLink = document.getElementById('mainWebsiteLink');
+
+    function saveUsername() {
+      localStorage.setItem('username', usernameInput.value);
+    }
+
+    function saveMainWebsite() {
+      localStorage.setItem('mainWebsite', mainWebsiteInput.value);
+      mainWebsiteLink.href = mainWebsiteInput.value;
+      mainWebsiteLink.innerText = mainWebsiteInput.value;
+    }
+
+    mainWebsiteLink.addEventListener('click', function (event) {
+      event.preventDefault();
+      var url = mainWebsiteInput.value;
+      window.open(url, '_blank');
+    });
+
+    function loadUserData() {
+      usernameInput.value = localStorage.getItem('username') || '';
+      mainWebsiteInput.value = localStorage.getItem('mainWebsite') || '';
+      mainWebsiteLink.href = localStorage.getItem('mainWebsite') || '#';
+      mainWebsiteLink.innerText = localStorage.getItem('mainWebsite') || 'View Website';
+    }
+
+    loadUserData();
+  </script>
+</body>
+
+</html>
