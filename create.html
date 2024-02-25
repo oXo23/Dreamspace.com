@@ -117,7 +117,7 @@
       var code = editor.getValue()
       var prev;
       prev = "data:text/html," + GAME_TEMPLATE.replace("_code_", code);
-      window.location.href = (prev);
+      window.open(prev);
     }
 
     function save() {
