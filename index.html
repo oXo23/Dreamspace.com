@@ -1,50 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Dreamspace - home</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta name="author" content="TIKITAKA.INC">
-    <meta name="description" content="Dreamspace - home">
-    <meta name="application-name" content="Dreamspace">
-    <meta name="keywords" content="Dreamspace, home, homepage">
-    <style>
-      * {
-        box-sizing:border-box;
-      }
-      
-      body, #app {
-        margin:0;
-      }
-      
-      .btn_link {
-        text-decoration:none;
-        color:white;
-        margin-left:10%;
-        font-size:25px;
-      }
 
-      .btn_link:hover {
-        text-decoration:underline;
-      }
+<head>
+  <title>Dreamspace - home</title>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="author" content="TIKITAKA.INC">
+  <meta name="description" content="Dreamspace - home">
+  <meta name="application-name" content="Dreamspace">
+  <meta name="keywords" content="Dreamspace, home, homepage">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      .navbar {
-        background-color:#3f3f3f;
-        padding:5px;
-      }
-    </style>
-  </head>
-  <body bgcolor="#1c1c1c">
-    <div id="app">
-      <nav class="navbar">
-        <a class="btn_link" onclick="create()">Create</a>
-        <a class="btn_link" onclick="profile()">Profile</a>
-      </nav>
-    </div>
-    <script>
-      function create() {
-        window.location.href=("create.html")
-      }
-    </script>
-  </body>
+    body,
+    #app {
+      margin: 0;
+    }
+
+    .btn_link {
+      text-decoration: none;
+      color: white;
+      margin-left: 10%;
+      font-size: 25px;
+    }
+
+    .btn_link:hover {
+      text-decoration: underline;
+    }
+
+    .navbar {
+      background-color: #3f3f3f;
+      padding: 5px;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+
+<body bgcolor="#1c1c1c">
+  <div id="app">
+    <nav class="navbar">
+      <a class="btn_link" onclick="create()">Create</a>
+      <a class="btn_link" onclick="profile()">Profile</a>
+      <a class="btn_link" onclick="support()">Support</a>
+    </nav>
+    <h2 style="color:white;">No games for now...</h2>
+  </div>
+  <script>
+    function create() {
+      window.location.href = ("create.html")
+    }
+    function profile() {
+      window.location.href = ("profile.html")
+    }
+    function support() {
+      sendEmail("Dream Space team", prompt("Email To Respone your request"), prompt("What is the problem?"))
+    }
+
+    (function () {
+      emailjs.init('CYa7t-yythecWXLPL');
+    })();
+
+    function sendEmail(a, b, c) {
+      emailjs.send('service_wscxyji', 'template_334gzv6', {
+        to_name: a,
+        from_name: b,
+        message: c,
+      }).then(function (response) {
+        console.log('Email sent successfully', response);
+      }, function (error) {
+        alert('Email sending failed', error);
+      });
+    }
+  </script>
+</body>
+
 </html>
