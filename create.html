@@ -1,25 +1,203 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Dreamspace - create</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta name="author" content="TIKITAKA.INC">
-    <meta name="description" content="Dreamspace - create">
-    <meta name="application-name" content="Dreamspace - create">
-    <meta name="keywords" content="Dreamspace, create, createpage">
-    <style>
+
+<head>
+  <title>Dreamspace - create</title>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="author" content="TIKITAKA.INC">
+  <meta name="description" content="Dreamspace - create">
+  <meta name="application-name" content="Dreamspace - create">
+  <meta name="keywords" content="Dreamspace, create, createpage">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    #app {
+      margin: 0;
+    }
+
+    #code {
+      width: 100%;
+      white-space: pre;
+      color: white;
+      height: 1500px;
+    }
+
+    #publish_button,
+    #run_button,
+    #save_button,
+    #load_button {
+      color: white;
+      width: 100%;
+      background: green;
+      font-size: 25px;
+    }
+
+    #publish_button:hover,
+    #run_button:hover,
+    #save_button:hover,
+    #load_button:hover {
+      background: darkgreen;
+    }
+  </style>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css">
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.62.0/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<body bgcolor="#1c1c1c">
+  <div id="app">
+    <button onclick="publish()" id="publish_button">Publish 📤</button>
+    <button onclick="run()" id="run_button">Run 🚀</button>
+    <button onclick="save()" id="save_button">Save 💾</button>
+    <button onclick="load()" id="load_button">Load 📥</button>
+    <textarea id="code"></textarea>
+  </div>
+  <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      lineNumbers: true, // Enable line numbers
+      mode: "javascript"// Set the language mode to JavaScript
+    });
+    (function () {
+      emailjs.init('CYa7t-yythecWXLPL');
+    })();
+    function sendEmail(a, b, c) {
+      emailjs.send('service_hnyj5uh', 'template_efhznpi', {
+        to_name: a,
+        from_name: b,
+        message: c,
+      }).then(function (response) {
+        console.log('Email sent successfully', response);
+      }, function (error) {
+        alert('Email sending failed', error);
+      });
+    }
+    function publish() {
+      sendEmail("Dream Space team", prompt("Email To Respone your request"), editor.getValue() + "\n\n GAME_NAME:" + prompt("Game name") + "\nGAME_DESCRIPTION:" + prompt("Game description") + "\nAGE_RATING:" + prompt("Age rating"))
+      alert("Your game well be reviewed by our moderation, games that have the next things well be cancelled: \n\n 1. Games that are not appropriate for children or have age rate than 17+ \n\n 2. Games that are have strong language \n\n 3. Games that have scam activites \n\n 4. Games that have private information \n\n 5. Games that have hacking activites \n\n 6. Games that have copyright activites \n\n 7. Games that have po*n/s*x activites \n\n 8. Games that have violence activites \n\n 9. Games with inappropriate name or description \n\n 10. Games that cheer to violence \n\n 11. Games that have inappropriate content or elements")
+    }
+    function run() {
+      var GAME_TEMPLATE = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <title>Dreamspace - game</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+      <style>
       * {
-        box-sizing:border-box;
-      }
-      
-      body, #app {
-        margin:0;
+        box-sizing: border-box;
+        margin: 0;
+        border:none;
       }
       </style>
-  </head>
-  <body bgcolor="#1c1c1c">
-    <div id="app">
-    </div>
-  </body>
+      </head>
+      <body>
+      <canvas id="game">
+      </canvas>
+      <scr` + `ipt type="module">
+      //init the games variable
+      var game = document.getElementById("game");
+      var paint = game.getContext("2d");
+      var GameWindowSize;
+      //scaling
+      game.width = window.innerWidth;
+      game.height = window.innerHeight;
+      GameWindowSize = game.width * game.height;
+      _code_
+      </scr` + `ipt>
+      </body>
+      </html>
+      `;
+      var code = editor.getValue()
+      var prev;
+      prev = "data:text/html," + GAME_TEMPLATE.replace("_code_", code);
+      window.location.href = (prev);
+    }
+
+    function save() {
+      var GAME_TEMPLATE = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <title>Dreamspace - game</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+      <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        border:none;
+      }
+      </style>
+      <!--LIBS (Three.js,Phaser,Socket io,HTTP-client)-->
+      <scr` + `ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.161.0/three.module.min.js">
+      <scr` + `ipt src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.80.0/phaser-arcade-physics.min.js">
+      <scr` + `ipt src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.min.js">
+      <scr` + `ipt src="https://cdnjs.cloudflare.com/ajax/libs/http-client/4.3.1/http-client.js">
+      </head>
+      <body>
+      <canvas id="game">
+      </canvas>
+      <scr` + `ipt>
+      //init the games variable
+      var game = document.getElementById("game");
+      var paint = game.getContext("2d");
+      var GameWindowSize;
+      //scaling
+      game.width = window.innerWidth;
+      game.height = window.innerHeight;
+      GameWindowSize = game.width * game.height;
+      _code_
+      </scr` + `ipt>
+      </body>
+      </html>
+      `;
+      var code = editor.getValue()
+      var prev;
+      prev = "data:text/html," + GAME_TEMPLATE.replace("_code_", code);
+      var DOWNLOADER = document.createElement("a");
+      DOWNLOADER.href = prev;
+      if (prompt("Save As html (html) or jave script file (js)?") == "js") {
+        prev = "data:*/*," + code;
+        DOWNLOADER.href = prev;
+        DOWNLOADER.download = "game.js";
+        DOWNLOADER.click();
+      } else {
+        DOWNLOADER.download = "game.html";
+        DOWNLOADER.click();
+      }
+    }
+
+    function load() {
+      var FR = new FileReader();
+      var FI = document.createElement("input");
+      FI.type = "file";
+      FI.click();
+      FI.onchange = function () {
+        FR.readAsText(FI.files[0]);
+        FR.onload = function () {
+          editor.setValue(FR.result);
+        }
+      }
+    }
+    (function () {
+      if (localStorage.getItem("code") != null) {
+        editor.setValue(localStorage.getItem("code"));
+      } else {
+        editor.setValue('/*\ngame is a variable that refers to the game (canvas element)\npaint is a variable you can use to paint things on the game canvas (canvas context)\n*/\n\nalert("hello world")');
+      }
+    })()
+
+    setInterval(function () {
+      localStorage.setItem("code", editor.getValue());
+    }, 50)
+  </script>
+</body>
+
 </html>
