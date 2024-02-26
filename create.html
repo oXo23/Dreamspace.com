@@ -57,6 +57,8 @@
     <button onclick="save()" id="save_button">Save 💾</button>
     <button onclick="load()" id="load_button">Load 📥</button>
     <textarea id="code"></textarea>
+    <center><h2>Preview:</h2></center>
+    <iframe src="data:text/html;charset=utf-8,"></iframe>
   </div>
   <script>
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -116,8 +118,9 @@
       `;
       var code = editor.getValue()
       var prev;
-      prev = "data:text/html," + GAME_TEMPLATE.replace("_code_", code);
-      window.open(prev);
+      prev = "data:text/html;charset=utf-8," + GAME_TEMPLATE.replace("_code_", code);
+      document.querySelector("iframe").src = prev;
+      document.querySelector("iframe").contentDocument.evaluate(code);
     }
 
     function save() {
