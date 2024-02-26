@@ -57,10 +57,14 @@
     <button onclick="save()" id="save_button">Save 💾</button>
     <button onclick="load()" id="load_button">Load 📥</button>
     <textarea id="code"></textarea>
-    <center><h2>Preview:</h2></center>
+    <center><h2 style="color:white;">Preview:</h2></center>
     <iframe src="data:text/html;charset=utf-8,"></iframe>
   </div>
   <script>
+    
+    document.querySelector("iframe").width = window.innerWidth;
+    document.querySelector("iframe").height = window.innerHeight;
+   
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true, // Enable line numbers
       mode: "javascript"// Set the language mode to JavaScript
