@@ -61,10 +61,10 @@
     <iframe src="data:text/html;charset=utf-8,"></iframe>
   </div>
   <script>
-    
+    setInterval(function(){
     document.querySelector("iframe").width = window.innerWidth;
     document.querySelector("iframe").height = window.innerHeight;
-   
+    },10)
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true, // Enable line numbers
       mode: "javascript"// Set the language mode to JavaScript
